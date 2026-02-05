@@ -1,17 +1,16 @@
 
 import React from 'react';
-import { 
-  LayoutDashboard, 
-  ClipboardList, 
-  ShieldCheck, 
-  FileCheck, 
-  ListChecks, 
-  Bell, 
-  BarChart3, 
-  History, 
+import {
+  LayoutDashboard,
+  ClipboardList,
+  ShieldCheck,
+  FileCheck,
+  ListChecks,
+  Bell,
+  BarChart3,
+  History,
   LogOut,
   Megaphone,
-  ClipboardType,
   Gavel,
   Users,
   Settings,
@@ -54,22 +53,21 @@ export const ROLE_LABELS: Record<UserRole, string> = {
 
 export const NAV_ITEMS = [
   { id: 'dashboard', label: 'لوحة التحكم', icon: <LayoutDashboard size={20} />, roles: Object.values(UserRole) },
-  
+
   { id: 'annual-plan', label: 'الخطة السنوية', icon: <ClipboardList size={20} />, roles: [UserRole.GENERAL_DIRECTOR, UserRole.DEPT_MANAGER, UserRole.DATA_ENTRY, UserRole.SYSTEM_ADMIN] },
-  
+
   { id: 'tasks-oversight', label: 'المهام', icon: <ShieldCheck size={20} />, roles: [UserRole.AUDITOR, UserRole.DEPT_MANAGER, UserRole.GENERAL_DIRECTOR, UserRole.DATA_ENTRY] },
 
   // الجهات الرقابية - متاحة للمدير العام وضابط الاتصال (المنشئ)
   { id: 'regulatory-entities', label: 'الجهات الرقابية', icon: <Gavel size={20} />, roles: [UserRole.GENERAL_DIRECTOR, UserRole.LIAISON_OFFICER, UserRole.SYSTEM_ADMIN] },
-  
+
   { id: 'reports', label: 'التقارير', icon: <FileCheck size={20} />, roles: [UserRole.GENERAL_DIRECTOR, UserRole.DEPT_MANAGER, UserRole.AUDITOR] },
-  
+
   { id: 'doc-requests', label: 'طلبات المستندات', icon: <FolderOpen size={20} />, roles: [UserRole.AUDITOR, UserRole.LIAISON_OFFICER] },
-  
+
   { id: 'notifications', label: 'الإشعارات', icon: <Bell size={20} />, roles: Object.values(UserRole) },
-  { id: 'surveys', label: 'الاستبيانات', icon: <ClipboardType size={20} />, roles: Object.values(UserRole) },
-  
+
   { id: 'awareness', label: 'رسائل التوعية', icon: <Megaphone size={20} />, roles: [UserRole.GENERAL_DIRECTOR, UserRole.SYSTEM_ADMIN] },
-  
+
   { id: 'logout', label: 'تسجيل الخروج', icon: <LogOut size={20} />, roles: Object.values(UserRole) }
 ];

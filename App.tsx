@@ -10,7 +10,6 @@ import PlanBasedTaskList from './components/PlanBasedTaskList';
 import TaskDetailsView from './components/TaskDetailsView';
 import UserManagement from './components/UserManagement';
 import AwarenessCenter from './components/AwarenessCenter';
-import EmployeeVoice from './components/EmployeeVoice';
 import DocRequestsView from './components/DocRequestsView';
 import RegulatoryEntitiesView from './components/RegulatoryEntitiesView';
 import { DEPARTMENTS } from './constants';
@@ -129,7 +128,6 @@ const App: React.FC = () => {
       case 'tasks-oversight': return <PlanBasedTaskList tasks={filteredTasks} plans={INITIAL_MOCK_PLANS} userRole={currentUser.role} onSelectTask={setSelectedTaskId} onAddTask={() => { }} />;
       case 'regulatory-entities': return <RegulatoryEntitiesView user={currentUser} />;
       case 'awareness': return <AwarenessCenter user={currentUser} />;
-      case 'surveys': return <EmployeeVoice user={currentUser} />;
       case 'doc-requests': return <DocRequestsView requests={docRequests} user={currentUser} onUpdateStatus={handleUpdateDocStatus} />;
       default:
         return (
