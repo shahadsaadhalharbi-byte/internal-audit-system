@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import { User } from '../types';
-import { geminiService } from '../services/geminiService';
 import { Send, Sparkles, Loader2, Calendar, Target, CheckCircle2 } from 'lucide-react';
 
 const AwarenessCenter: React.FC<{ user: User }> = ({ user }) => {
@@ -12,7 +11,8 @@ const AwarenessCenter: React.FC<{ user: User }> = ({ user }) => {
   const handleAiSuggest = async () => {
     if (!topic) return;
     setLoading(true);
-    const result = await geminiService.suggestAwarenessMessage(topic);
+    // Static fallback message (Gemini API removed)
+    const result = `رسالة توعوية حول: ${topic}\n\nنود التأكيد على أهمية ${topic} في بيئة العمل. يجب على جميع الموظفين الالتزام بالمعايير والإجراءات المعتمدة لضمان تحقيق أعلى مستويات الجودة والنزاهة في العمل.\n\nنشكر لكم تعاونكم المستمر.`;
     setAiResult(result);
     setLoading(false);
   };
@@ -36,14 +36,14 @@ const AwarenessCenter: React.FC<{ user: User }> = ({ user }) => {
           <div className="space-y-4">
             <div className="relative group">
               <Sparkles className="absolute left-3 top-3 text-[#008767] opacity-50 group-hover:opacity-100 transition-opacity" size={18} />
-              <input 
-                type="text" 
+              <input
+                type="text"
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
                 placeholder="أدخل موضوعاً للحصول على اقتراح ذكي (مثلاً: أمانة التعامل مع الملفات)"
                 className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pr-4 pl-10 outline-none focus:border-[#008767] text-sm"
               />
-              <button 
+              <button
                 onClick={handleAiSuggest}
                 disabled={loading || !topic}
                 className="absolute left-1 top-1 bottom-1 px-4 bg-[#008767] text-white rounded-lg text-xs font-bold disabled:opacity-50 transition-all flex items-center gap-1"
@@ -54,7 +54,7 @@ const AwarenessCenter: React.FC<{ user: User }> = ({ user }) => {
             </div>
 
             <div>
-              <textarea 
+              <textarea
                 value={aiResult}
                 onChange={(e) => setAiResult(e.target.value)}
                 className="w-full bg-slate-50 border border-slate-200 rounded-xl py-4 px-4 outline-none focus:border-[#008767] h-64 text-sm leading-relaxed"
