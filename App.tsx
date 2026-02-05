@@ -47,6 +47,7 @@ const App: React.FC = () => {
   const [tasks, setTasks] = useState<AuditTask[]>(INITIAL_MOCK_TASKS);
   const [docRequests, setDocRequests] = useState<DocumentRequest[]>(INITIAL_DOC_REQUESTS);
   const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleRoleChange = (newRole: UserRole) => {
     setCurrentUser(prev => ({
@@ -140,14 +141,42 @@ const App: React.FC = () => {
     }
   };
 
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+    setIsMobileMenuOpen(false); // Close mobile menu when tab changes
+  };
+
   return (
     <div className="flex h-screen bg-white text-slate-900 overflow-hidden font-cairo" dir="rtl">
-      <div className="w-[320px] bg-white flex-shrink-0 z-30 shadow-xl shadow-slate-200/50 border-l border-slate-100">
-        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} userRole={currentUser.role} />
+      {/* Mobile Menu Backdrop */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Sidebar - Responsive */}
+      <div className={`
+        fixed lg:relative
+        w-[280px] lg:w-[320px]
+        bg-white flex-shrink-0 z-50 lg:z-30
+        shadow-xl shadow-slate-200/50 border-l border-slate-100
+        h-full
+        transition-transform duration-300 ease-in-out
+        ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'}
+      `}>
+        <Sidebar activeTab={activeTab} setActiveTab={handleTabChange} userRole={currentUser.role} />
       </div>
+
+      {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden bg-[#fbfcfd]">
-        <Header user={currentUser} onRoleChange={handleRoleChange} toggleSidebar={() => { }} />
-        <main className="flex-1 overflow-y-auto p-10 custom-scrollbar">
+        <Header
+          user={currentUser}
+          onRoleChange={handleRoleChange}
+          toggleSidebar={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        />
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-10 custom-scrollbar">
           <div className="max-w-[1300px] mx-auto">
             {renderContent()}
           </div>
