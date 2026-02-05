@@ -1,0 +1,7 @@
+{
+  "name": "Internal Audit System - Madinah Municipality",
+  "description": "A comprehensive digital solution for the Internal Audit General Department of Madinah Regional Municipality, managing annual plans, inspection tours, auditing tasks, and regulatory compliance with role-based access control and AI-powered insights.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
